@@ -1,0 +1,44 @@
+PRACTICAL NO:3
+
+Aim: Demonstrate Strassen's Matrix multiplication algorithm
+code :-package com.mycompany.strassmulti;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+public class Strassmulti {
+
+    public static void main(String[] args) throws IOException {
+        int[] a = new int[4];
+        int[] b = new int[4];
+
+        BufferedReader f1 = new BufferedReader(new FileReader("D:\\MSc\\AA\\M1.txt"));
+        for (int i = 0; i < 4; i++) {
+            a[i] = Integer.parseInt(f1.readLine().trim()); 
+        }
+        f1.close();
+
+        BufferedReader f2 = new BufferedReader(new FileReader("D:\\MSc\\AA\\M2.txt"));
+        for (int i = 0; i < 4; i++) {
+            b[i] = Integer.parseInt(f2.readLine().trim());
+        }
+        f2.close();
+
+        System.out.println("Strassen Matrix Multiplication :");
+        int P1 = (a[0] + a[3]) * (b[0] + b[3]);
+        int P2 = (a[2] + a[3]) * b[0];
+        int P3 = a[0] * (b[1] - b[3]);
+        int P4 = a[3] * (b[2] - b[0]);
+        int P5 = (a[0] + a[1]) * b[3];
+        int P6 = (a[2] - a[0]) * (b[0] + b[1]);
+        int P7 = (a[1] - a[3]) * (b[2] + b[3]);
+        int C1 = (P1 + P4 - P5 + P7);
+        int C2 = P3 + P5;
+        int C3 = (P2 + P4);
+        int C4 = P1 + P3 - P2 + P6;
+
+        System.out.println(C1 + " " + C2);
+        System.out.println(C3 + " " + C4);
+    }
+}
+

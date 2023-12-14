@@ -1,0 +1,128 @@
+Prac 1 
+Sorting algo 
+code:-
+
+def bubble_sort(arr):
+    steps = 0
+    n = len(arr)
+    for i in range(n - 1):
+        for j in range(n - i - 1):
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+                steps += 1
+    return steps
+
+
+def heap_sort(arr):
+    steps = 0
+    n = len(arr)
+
+    def heapify(arr, n, i):
+        nonlocal steps
+        largest = i
+        left = 2 * i + 1
+        right = 2 * i + 2
+
+        if left < n and arr[left] > arr[largest]:
+            largest = left
+
+        if right < n and arr[right] > arr[largest]:
+            largest = right
+
+        if largest != i:
+            arr[i], arr[largest] = arr[largest], arr[i]
+            steps += 1
+            steps += heapify(arr, n, largest)
+        return steps
+
+    for i in range(n // 2 - 1, -1, -1):
+        steps += heapify(arr, n, i)
+
+    for i in range(n - 1, 0, -1):
+        arr[i], arr[0] = arr[0], arr[i]
+        steps += 1
+        steps += heapify(arr, i, 0)
+
+    return steps
+
+
+def insertion_sort(arr):
+    steps = 0
+    n = len(arr)
+    for i in range(1, n):
+        key = arr[i]
+        j = i - 1
+        while j >= 0 and arr[j] > key:
+            arr[j + 1] = arr[j]
+            steps += 1
+            j -= 1
+        arr[j + 1] = key
+        steps += 1
+    return steps
+
+
+def selection_sort(arr):
+    steps = 0
+    n = len(arr)
+    for i in range(n - 1):
+        min_idx = i
+        for j in range(i + 1, n):
+            if arr[j] < arr[min_idx]:
+                min_idx = j
+        arr[i], arr[min_idx] = arr[min_idx], arr[i]
+        steps += 1
+    return steps
+
+
+def print_array(arr):
+    for num in arr:
+        print(num, end=" ")
+    print()
+
+
+def main():
+    print("Select a sorting algorithm:\n1. Bubble Sort\n2. Heap Sort\n3. Selection Sort\n4. Insertion Sort")
+    choice = int(input("Enter your choice: "))
+    size = int(input("Enter the size of the array: "))
+    arr = [int(input(f"Enter number {i + 1}: ")) for i in range(size)]
+
+    print("Original Array:")
+    print_array(arr)
+
+    start_time, end_time, total_steps = 0, 0, 0
+
+    if choice == 1:
+        print("Bubble Sort:")
+        start_time = time.time()
+        total_steps = bubble_sort(arr)
+        end_time = time.time()
+    elif choice == 2:
+        print("Heap Sort:")
+        start_time = time.time()
+        total_steps = heap_sort(arr)
+        end_time = time.time()
+    elif choice == 3:
+        print("Selection Sort:")
+        start_time = time.time()
+        total_steps = selection_sort(arr)
+        end_time = time.time()
+    elif choice == 4:
+        print("Insertion Sort:")
+        start_time = time.time()
+        total_steps = insertion_sort(arr)
+        end_time = time.time()
+    else:
+        print("Invalid choice.")
+        return
+
+    elapsed_time = end_time - start_time
+
+    print("\nSorted Array:", arr)
+    print("\nTotal Steps:", total_steps)
+    print("\nTime Taken (s):", elapsed_time)
+
+
+if __name__ == "__main__":
+    import time
+
+    main()

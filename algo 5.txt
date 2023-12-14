@@ -1,0 +1,38 @@
+PRACTICAL NO:5
+
+Aim: Demonstrate the solution for the Rod cutting problem
+code:
+def max_prof(price, n):
+    # Create a table to store the maximum profit for each rod length
+    dp = [0] * (n + 1)
+
+    for i in range(1, n + 1):
+        max_val = float('-inf')
+        for j in range(i):
+            max_val = max(max_val, price[j] + dp[i - j - 1])
+        dp[i] = max_val
+
+    return dp[n]
+
+# Get user input for the rod length
+rod_len = int(input("Enter the length of the rod: "))
+
+
+
+# Get user input for the price
+price = []
+for i in range(rod_len):
+    pl = int(input(f"Enter the price for length {i+1}: "))
+    price.append(pl)
+    
+#result = max_prof(price, rod_len)
+#print("Maximum Profit Value is:", result)
+
+try:
+    if rod_len < 0:
+        raise ValueError("Invalid! Please Enter Rod length should be a positive integer.")
+
+    result = max_prof(price, rod_len)
+    print("Maximum Obtainable Value:",  result)
+except ValueError as e:
+    print("Error:", e)

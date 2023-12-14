@@ -1,0 +1,31 @@
+PRACTICAL NO:4
+
+Aim: Demonstrate the Hiring Problem
+code :- 
+from random import shuffle
+
+candidates = []
+best_candidate = -1
+name = ""
+
+print("Enter the number of candidates:")
+n = int(input())
+
+for a in range(n):
+    candidate_name = input("Enter the name: ")
+    marks = int(input("Enter the marks: "))
+    candidates.append((candidate_name, marks))
+
+shuffle(candidates)
+print("\nAfter shuffling:")
+for candidate in candidates:
+    print(f"{candidate[0]}: {candidate[1]}")
+
+def v(candidates, best_candidate):
+    for candidate in candidates:
+        if candidate[1] > best_candidate:
+            best_candidate = candidate[1]
+            name = candidate[0]
+    print(f"The best is: {name} having marks: {best_candidate}")
+v(candidates,best_candidate)
+
