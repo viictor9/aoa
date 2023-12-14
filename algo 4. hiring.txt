@@ -1,7 +1,4 @@
-PRACTICAL NO:4
 
-Aim: Demonstrate the Hiring Problem
-code :- 
 from random import shuffle
 
 candidates = []
